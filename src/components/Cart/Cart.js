@@ -4,6 +4,8 @@ import classes from "./Cart.module.css";
 import CartContext from "../../store/CartContext";
 import CartItem from "./CartItem";
 
+const API_URL = process.env.REACT_APP_API_URL_ORDERS;
+
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
 
@@ -19,16 +21,13 @@ const Cart = (props) => {
   };
 
   const postOrderHandler = async () => {
-    const response = await fetch(
-      "https://react-restaurant-26852-default-rtdb.firebaseio.com/orders.json",
-      {
-        method: "POST",
-        body: JSON.stringify(cartCtx),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify(cartCtx),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const data = await response.json();
     console.log(data);
