@@ -4,8 +4,7 @@ import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem/MealItem";
 
 const API_URL = process.env.REACT_APP_API_URL;
-console.log(API_URL);
-console.log(process.env.REACT_APP_TEST);
+
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +62,7 @@ const AvailableMeals = () => {
   }
 
   if (mealsList.length > 0) {
-    content = <p>{mealsList}</p>;
+    content = <div>{mealsList}</div>;
   }
 
   return (
