@@ -11,11 +11,27 @@ const Cart = (props) => {
   const hasItems = cartCtx.items.length > 0;
 
   const cartItemRemoveHandler = (id) => {
-      cartCtx.removeItem(id)
+    cartCtx.removeItem(id);
   };
 
   const cartItemAddHandler = (item) => {
-      cartCtx.addItem(item)
+    cartCtx.addItem(item);
+  };
+
+  const postOrderHandler = async () => {
+    const response = await fetch(
+      "https://react-restaurant-26852-default-rtdb.firebaseio.com/orders.json",
+      {
+        method: "POST",
+        body: JSON.stringify(cartCtx),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+    console.log(data);
   };
 
   const cartItems = (
@@ -44,7 +60,11 @@ const Cart = (props) => {
         <button className={classes["button--alt"]} onClick={props.onClose}>
           Close
         </button>
-        {hasItems && <button className={classes.button}>Order</button>}
+        {hasItems && (
+          <button className={classes.button} onClick={postOrderHandler}>
+            Order
+          </button>
+        )}
       </div>
     </Modal>
   );
