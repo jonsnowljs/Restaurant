@@ -26,8 +26,8 @@ const Checkout = (props) => {
 
     const enteredNameIsValid = !isEmpty(enteredName);
     const enteredStreetIsValid = !isEmpty(enteredStreet);
-    const enteredPostalCodeIsValid = !isEmpty(enteredPostalCode);
-    const enteredCityIsValid = isSixChars(enteredCity);
+    const enteredPostalCodeIsValid = isSixChars(enteredPostalCode);
+    const enteredCityIsValid = !isEmpty(enteredCity);
 
     setFormInputsValidity({
       name: enteredNameIsValid,
@@ -45,6 +45,13 @@ const Checkout = (props) => {
     if (!formIsValid) {
       return;
     }
+
+    props.onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostalCode
+    });
   };
 
   const nameControlClasses = `${classes.control} ${
